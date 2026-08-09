@@ -1,0 +1,7 @@
+dataset/
+PlantVillage/
+PlantVillage 1/
+
+__pycache__/
+*.pyc
+.env
