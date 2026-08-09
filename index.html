@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>AI Plant Disease Detector</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#f4f7f6;
+}
+
+/* Navbar */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+padding:20px 80px;
+background:white;
+box-shadow:0px 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#2e7d32;
+}
+
+/* Hero Section */
+
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px;
+}
+
+.hero-text{
+max-width:500px;
+}
+
+.hero-text h1{
+font-size:42px;
+color:#1b1b1b;
+}
+
+.hero-text span{
+color:#2e7d32;
+}
+
+.hero-text p{
+color:#666;
+margin-top:15px;
+}
+
+.hero img{
+width:420px;
+border-radius:15px;
+}
+
+/* Upload Card */
+
+.upload-card{
+
+width:500px;
+margin:60px auto;
+background:white;
+padding:40px;
+border-radius:15px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+
+}
+
+.upload-card h2{
+margin-bottom:20px;
+}
+
+input[type=file]{
+padding:10px;
+margin:20px 0;
+}
+
+button{
+
+padding:12px 25px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+.result{
+
+margin-top:20px;
+font-size:20px;
+font-weight:bold;
+color:#2e7d32;
+
+}
+
+.preview{
+
+margin-top:20px;
+
+}
+
+.preview img{
+width:250px;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">LeafAI</div>
+
+<div>AI Plant Disease Detection</div>
+
+</div>
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>AI Powered <span>Plant Disease Detection</span></h1>
+
+<p>Upload a plant leaf image and our deep learning model will instantly detect plant diseases and help farmers identify problems early.</p>
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6">
+
+</div>
+
+
+<div class="upload-card">
+
+<h2>Upload Plant Image</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input type="file" name="file" required>
+
+<br>
+
+<button type="submit">Detect Disease</button>
+
+</form>
+
+{% if img_path %}
+
+<div class="preview">
+<img src="{{img_path}}">
+</div>
+
+{% endif %}
+
+{% if prediction %}
+
+<div class="result">
+
+Disease Detected: {{prediction}}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

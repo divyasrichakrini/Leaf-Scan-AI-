@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LeafScan AI Detection</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background: linear-gradient(135deg,#e8f5e9,#c8e6c9);
+            text-align:center;
+            margin:0;
+            padding:0;
+        }
+
+        header{
+            background:#1b5e20;
+            color:white;
+            padding:20px;
+            font-size:28px;
+        }
+
+        .container{
+            margin-top:40px;
+        }
+
+        .upload-box{
+            background:white;
+            padding:30px;
+            width:450px;
+            margin:auto;
+            border-radius:12px;
+            box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        input[type=file]{
+            margin-top:20px;
+        }
+
+        button{
+            margin-top:20px;
+            padding:12px 25px;
+            background:#2e7d32;
+            border:none;
+            color:white;
+            font-size:16px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1b5e20;
+        }
+
+        img{
+            margin-top:20px;
+            border-radius:10px;
+            box-shadow:0px 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .result-box{
+            background:white;
+            width:60%;
+            margin:auto;
+            margin-top:30px;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+            text-align:left;
+        }
+
+        .result-box h2{
+            color:#1b5e20;
+        }
+
+        .tag{
+            display:inline-block;
+            padding:8px 15px;
+            border-radius:20px;
+            color:white;
+            margin-top:10px;
+        }
+
+        .healthy{
+            background:green;
+        }
+
+        .diseased{
+            background:red;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+🌿 LeafScan AI - Plant Disease Detection
+</header>
+
+<div class="container">
+
+    <div class="upload-box">
+
+        <h2>Upload Leaf Image</h2>
+
+        <form action="/detect" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="file" required>
+
+            <br>
+
+            <button type="submit">Detect Disease</button>
+
+        </form>
+
+    </div>
+
+
+    {% if img_path %}
+
+        <h3>Uploaded Image</h3>
+
+        <img src="{{ img_path }}" width="300">
+
+    {% endif %}
+
+
+    {% if prediction %}
+
+    <div class="result-box">
+
+        <h2>Prediction : {{ prediction }}</h2>
+
+        <h3>Confidence Score : {{ confidence }}%</h3>
+
+        {% if "Healthy" in status %}
+            <div class="tag healthy">{{ status }}</div>
+        {% else %}
+            <div class="tag diseased">{{ status }}</div>
+        {% endif %}
+
+        <h3>Description</h3>
+        <p>{{ details.description }}</p>
+
+        <h3>Solution</h3>
+        <p>{{ details.solution }}</p>
+
+        <h3>Disease Severity</h3>
+        <p>{{ details.severity }}</p>
+
+        <h3>Recommended Medicine</h3>
+        <p>{{ details.medicine }}</p>
+
+        <h3>Farmer Tip</h3>
+        <p>{{ details.tip }}</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
